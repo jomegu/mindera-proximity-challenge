@@ -1,0 +1,1 @@
+# mindera-proximity-challenge
