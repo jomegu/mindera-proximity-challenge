@@ -12,4 +12,4 @@ A [k-means](https://en.wikipedia.org/wiki/K-means_clustering) strategy was taken
 
 ## Examples
 
-Check [examples](../../EXAMPLES.md).
+Check [examples](EXAMPLES.md).
