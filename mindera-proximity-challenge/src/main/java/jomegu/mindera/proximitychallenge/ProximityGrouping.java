@@ -14,9 +14,9 @@ public class ProximityGrouping {
     
     /**
      *
-     * @param numbers
-     * @param nGroups
-     * @return
+     * @param numbers An integer array with the numbers to be grouped
+     * @param nGroups The desired number of groups
+     * @return An array of integer arrays representing the groups
      */
     public static int[][] groupInt(int[] numbers, int nGroups){
         if(numbers == null || numbers.length == 0){
@@ -45,11 +45,11 @@ public class ProximityGrouping {
         float[] centers = selectCentersMostDistant(numbers, nGroups); //contains the center of each group
         groups = assignGroups(numbers, centers);
         
-        while(changed){
-            centers = calcCenters(groups);
-            old_groups = groups;
-            groups = assignGroups(numbers, centers);
-            changed = !Arrays.deepEquals(groups, old_groups);
+        while(changed){ //while the groups are changed
+            centers = calcCenters(groups);  //calculate the new centers
+            old_groups = groups; //save the current instance of groups
+            groups = assignGroups(numbers, centers); //assign the numbers into the new groups
+            changed = !Arrays.deepEquals(groups, old_groups); //verify if the groups were changed
         }
         
         for(int i=0; i<finalGroups.length; i++){
@@ -99,6 +99,7 @@ public class ProximityGrouping {
         return centers;
     }
     
+    //Assigns the numbers to the groups where the distance to the center is minimal
     private static TIntArrayList[] assignGroups(int[] numbers, float[] centers){
         TIntArrayList[] groups = new TIntArrayList[centers.length];
         for(int number : numbers){
@@ -130,6 +131,7 @@ public class ProximityGrouping {
         return groups;
     }
 
+    //Calculates the mean of each group to be used as the centers
     private static float[] calcCenters(TIntArrayList[] groups) {
         float[] centers = new float[groups.length];
         for(int i=0; i<groups.length; i++){

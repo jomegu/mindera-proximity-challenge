@@ -5,12 +5,8 @@
  */
 package jomegu.mindera.proximitychallenge;
 
+import gnu.trove.list.array.TIntArrayList;
 import java.util.Arrays;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
@@ -73,6 +69,30 @@ public class ProximityGroupingTest {
             }
         }
         assertTrue(noIntersection);
+    }
+    
+    /**
+     * Test of groupInt method, of class ProximityGrouping.
+     * Verifies if all the provided numbers are in the final groups.
+     */
+    @org.junit.Test
+    public void testGroupIntAllGrouped() {
+        System.out.println("groupInt - all numbers grouped test");
+        int[] numbers = {160, 15, 14, 13, 34, 23, 24, 25, 26, 28, 45, 34, 23, 29, 12, 23, 45, 67, 23, 12, 34, 45, 23, 67, 23, 670};
+        int nGroups = 4;
+        int[][] groups = ProximityGrouping.groupInt(numbers, nGroups);
+        boolean not_missing = true;
+        TIntArrayList groups_in_list = new TIntArrayList(numbers.length);
+        for(int[] group : groups){ //transform the array of arrays in a single arraylist
+            groups_in_list.add(group);
+        }
+        for (int number : numbers) { //for every provided number
+            if(!groups_in_list.remove(number)){ //if the number wasn't in any group
+                not_missing = false;
+                break;
+            }
+        }
+        assertTrue(not_missing);
     }
 
     /**
